@@ -76,7 +76,7 @@ export default function Home() {
         "0 0 15px #ff4da6, 0 0 35px #ff4da6, 0 0 60px #ff4da6",
     }}
   >
-    Start ❤
+    Start <span className="text-pink-200">♥</span>
   </button>
 </Link>
 

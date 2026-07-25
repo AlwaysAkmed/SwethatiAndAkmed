@@ -1,6 +1,10 @@
 "use client";
 
+import { useState } from "react";
+
 export default function LetterPage() {
+  const [clickMessage, setClickMessage] = useState("");
+  const [loveLevel, setLoveLevel] = useState(75);
   const trackSources = [
     "https://open.spotify.com/embed/track/6FMMd1fixOMmhplCevpjL7?utm_source=generator&si=50764b4117134662",
     "https://open.spotify.com/embed/track/0PG9fbaaHFHfre2gUVo7AN?utm_source=generator&si=46829aa410f8413f",
@@ -30,20 +34,20 @@ export default function LetterPage() {
           ].map((heart, index) => (
             <span
               key={index}
-              className="heart-drop absolute text-3xl"
+              className="heart-drop absolute text-3xl text-pink-500"
               style={{
                 left: heart.left,
                 animationDelay: heart.delay,
                 animationDuration: heart.duration,
               }}
             >
-              ❤️
+              ♥
             </span>
           ))}
         </div>
 
         <h1 className="text-4xl font-bold text-pink-600 mb-6">
-          For You ❤️
+          For You <span className="text-pink-600">♥</span>
         </h1>
 
         <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-line">
@@ -74,7 +78,7 @@ Akmed
 
           Love,
           {"\n"}
-          Akmed ❤️
+          Akmed <span className="text-pink-600">♥</span>
         </p>
 
         <div className="mt-10">
@@ -118,6 +122,36 @@ Akmed
                 </div>
               );
             })}
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setClickMessage("I love you 💗")}
+            className="rounded-full bg-pink-500 px-8 py-3 text-white text-lg font-semibold shadow-lg shadow-pink-300/50 transition hover:scale-105"
+          >
+            Click me
+          </button>
+          {clickMessage ? (
+            <p className="text-pink-600 text-xl font-semibold">{clickMessage}</p>
+          ) : null}
+
+          <div className="w-full rounded-3xl border border-pink-200 bg-pink-50 p-4 text-left text-gray-700">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-lg font-semibold text-pink-500">
+                how much do u love me :3
+              </span>
+              <span className="text-pink-600 font-semibold">{loveLevel}%</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={loveLevel}
+              onChange={(event) => setLoveLevel(Number(event.target.value))}
+              className="w-full accent-pink-500"
+            />
           </div>
         </div>
 

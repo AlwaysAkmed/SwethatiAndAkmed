@@ -48,7 +48,7 @@ export default function PinPage() {
         }}
       >
         <h1 className="text-4xl text-pink-300 font-bold mb-4">
-          Enter PIN ❤️
+          Enter PIN <span className="text-pink-300">♥</span>
         </h1>
 
         <div className="flex justify-center gap-3 mb-8">
