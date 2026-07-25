@@ -47,8 +47,8 @@ Akmed
 
           <div className="grid gap-5 md:grid-cols-2">
             {[
-              "https://open.spotify.com/embed/track/0PG9fbaaHFHfre2gUVo7AN",
-              "https://open.spotify.com/embed/track/6FMMd1fixOMmhplCevpjL7",
+              "https://open.spotify.com/embed/track/7ouMYWpwJ422jRcDASZB7P",
+              "https://open.spotify.com/embed/track/3Qm86XLflmIXVm1wcwkgDK",
               "https://open.spotify.com/embed/track/2TpxZ7JUBn3uw46aR7qd6V",
               "https://open.spotify.com/embed/track/0VjIjW4GlUZAMYd2vXMi3b",
             ].map((src, index) => (
