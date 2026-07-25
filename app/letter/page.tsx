@@ -50,7 +50,7 @@ Akmed
             {/* Spotify Song 1 */}
             <iframe
               style={{ borderRadius: "12px" }}
-              src="YOUR_SPOTIFY_EMBED_LINK_1"
+              src="https://open.spotify.com/track/0PG9fbaaHFHfre2gUVo7AN"
               width="100%"
               height="152"
               frameBorder="0"
