@@ -46,40 +46,14 @@ Akmed
           </h2>
 
           <div className="space-y-5">
-
-            {/* Spotify Song 1 */}
-            <iframe
-              style={{ borderRadius: "12px" }}
-              src="YOUR_SPOTIFY_EMBED_LINK_1"
-              width="100%"
-              height="152"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-            ></iframe>
-
-            {/* Spotify Song 2 */}
-            <iframe
-              style={{ borderRadius: "12px" }}
-              src="YOUR_SPOTIFY_EMBED_LINK_2"
-              width="100%"
-              height="152"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-            ></iframe>
-
-            {/* Spotify Song 3 */}
-            <iframe
-              style={{ borderRadius: "12px" }}
-              src="YOUR_SPOTIFY_EMBED_LINK_3"
-              width="100%"
-              height="152"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-            ></iframe>
-
+            <div className="rounded-3xl border border-pink-200 bg-pink-50 p-6 text-left text-gray-700">
+              <p className="text-lg font-semibold text-pink-500 mb-2">
+                Songs are coming soon!
+              </p>
+              <p>
+                Add your Spotify embed links to this page to share music without broken resources.
+              </p>
+            </div>
           </div>
         </div>
 
