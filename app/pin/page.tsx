@@ -18,6 +18,7 @@ export default function PinPage() {
     if (newPin.length === 4) {
       setTimeout(() => {
         if (newPin === correctPin) {
+            sessionStorage.setItem("pinVerified", "true");
           router.push("/letter");
           // We'll change this to go to the next page later.
         } else {
