@@ -45,15 +45,35 @@ Akmed
             Our Songs 🎵
           </h2>
 
-          <div className="space-y-5">
-            <div className="rounded-3xl border border-pink-200 bg-pink-50 p-6 text-left text-gray-700">
-              <p className="text-lg font-semibold text-pink-500 mb-2">
-                Songs are coming soon!
-              </p>
-              <p>
-                Add your Spotify embed links to this page to share music without broken resources.
-              </p>
-            </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {[
+              "https://open.spotify.com/embed/track/0PG9fbaaHFHfre2gUVo7AN",
+              "https://open.spotify.com/embed/track/6FMMd1fixOMmhplCevpjL7",
+              "https://open.spotify.com/embed/track/2TpxZ7JUBn3uw46aR7qd6V",
+              "https://open.spotify.com/embed/track/0VjIjW4GlUZAMYd2vXMi3b",
+            ].map((src, index) => (
+              <div
+                key={index}
+                className="rounded-3xl border border-pink-200 bg-pink-50 p-4 text-left text-gray-700"
+              >
+                <p className="text-xl font-semibold text-pink-500 mb-3">
+                  Song {index + 1}
+                </p>
+                <iframe
+                  title={`song-${index + 1}`}
+                  src={src}
+                  width="100%"
+                  height="152"
+                  frameBorder="0"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                  className="rounded-3xl bg-white"
+                />
+                <p className="mt-3 text-sm text-gray-500">
+                  Replace the source URL above with your own Spotify embed link.
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 
