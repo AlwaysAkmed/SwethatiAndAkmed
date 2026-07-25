@@ -3,8 +3,8 @@
 export default function LetterPage() {
   const trackSources = [
     "https://open.spotify.com/embed/track/6FMMd1fixOMmhplCevpjL7?utm_source=generator&si=50764b4117134662",
-    "3Qm86XLflmIXVm1wcwkgDK",
-    "2TpxZ7JUBn3uw46aR7qd6V",
+    "https://open.spotify.com/embed/track/0PG9fbaaHFHfre2gUVo7AN?utm_source=generator&si=46829aa410f8413f",
+    "https://open.spotify.com/embed/track/7zycSpvjDcqh6YT1FEl2kY?utm_source=generator&si=b149b3fa0fd94817",
     "0VjIjW4GlUZAMYd2vXMi3b",
   ];
 
@@ -19,7 +19,28 @@ export default function LetterPage() {
 
   return (
     <main className="min-h-screen bg-pink-50 flex flex-col items-center justify-center p-6">
-      <div className="max-w-2xl w-full bg-white rounded-3xl shadow-xl p-8 text-center">
+      <div className="max-w-2xl w-full relative overflow-hidden bg-white rounded-3xl shadow-xl p-8 text-center">
+        <div className="pointer-events-none absolute inset-0">
+          {[
+            { left: "8%", delay: "0s", duration: "8s" },
+            { left: "22%", delay: "1.2s", duration: "10s" },
+            { left: "40%", delay: "0.6s", duration: "9s" },
+            { left: "58%", delay: "1.8s", duration: "11s" },
+            { left: "74%", delay: "0.9s", duration: "8.5s" },
+          ].map((heart, index) => (
+            <span
+              key={index}
+              className="heart-drop absolute text-3xl"
+              style={{
+                left: heart.left,
+                animationDelay: heart.delay,
+                animationDuration: heart.duration,
+              }}
+            >
+              ❤️
+            </span>
+          ))}
+        </div>
 
         <h1 className="text-4xl font-bold text-pink-600 mb-6">
           For You ❤️
