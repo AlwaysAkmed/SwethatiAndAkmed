@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Our Test",
+  title: "Our Journey",
   description: "Interactive experience",
 };
 
