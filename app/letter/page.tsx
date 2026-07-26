@@ -33,6 +33,17 @@ export default function LetterPage() {
     }, 3000);
   }
 
+  function handleMwah() {
+    setClickMessage("Mwah 😘");
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = window.setTimeout(() => {
+      setClickMessage("");
+      timeoutRef.current = null;
+    }, 2000);
+  }
+
   return (
     <main className="min-h-screen bg-pink-50 flex flex-col items-center justify-center p-6">
       <div className="max-w-2xl w-full relative overflow-hidden bg-white rounded-3xl shadow-xl p-8 text-center">
@@ -81,9 +92,18 @@ export default function LetterPage() {
           ))}
         </div>
 
-        <h1 className="text-4xl font-bold text-pink-600 mb-6">
-          For You <span className="text-pink-600">♥</span>
-        </h1>
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <h1 className="text-4xl font-bold text-pink-600 m-0">
+            For You <span className="text-pink-600">♥</span>
+          </h1>
+          <button
+            type="button"
+            onClick={handleMwah}
+            className="ml-2 rounded-full bg-pink-100 text-pink-600 px-3 py-1 text-sm font-semibold shadow-sm hover:bg-pink-200"
+          >
+            Mwah 😘
+          </button>
+        </div>
 
         <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-line">
           Dear Love Swethati,
