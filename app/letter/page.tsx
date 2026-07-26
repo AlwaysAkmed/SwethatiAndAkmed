@@ -245,10 +245,10 @@ Akmed
               {/* main overflow spill when >100 */}
               {loveLevel > 100 ? (
                 <>
-                  {Array.from({ length: Math.min(60, Math.max(0, loveLevel - 40)) }).map((_, s) => {
+                  {Array.from({ length: Math.min(36, Math.max(0, loveLevel - 40)) }).map((_, s) => {
                     const offset = (s % 9) * 12 - 48;
-                    const delay = `${(s % 8) * 0.08}s`;
-                    const dur = `${3 + (s % 4)}s`;
+                    const delay = `${(s % 8) * 0.12}s`;
+                    const dur = `${4 + (s % 4)}s`;
                     return (
                       <span
                         key={`spill-${s}`}
@@ -270,11 +270,11 @@ Akmed
               {/* side spill when nearing full to increase drop rate (>=80) */}
               {loveLevel >= 80 && loveLevel <= 100 ? (
                 <>
-                  {Array.from({ length: 24 }).map((_, s) => {
+                  {Array.from({ length: 12 }).map((_, s) => {
                     const side = s % 2 === 0 ? -1 : 1;
                     const offset = side * (20 + (s % 6) * 8);
-                    const delay = `${(Math.random() * 1.2).toFixed(2)}s`;
-                    const dur = `${(2 + Math.random() * 3).toFixed(2)}s`;
+                    const delay = `${(Math.random() * 2.2).toFixed(2)}s`;
+                    const dur = `${(3 + Math.random() * 3).toFixed(2)}s`;
                     const leftCalc = `calc(50% + ${offset}px)`;
                     const top = `${-12 - (s % 4) * 6}px`;
                     return (
