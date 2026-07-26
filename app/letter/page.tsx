@@ -37,27 +37,37 @@ export default function LetterPage() {
     <main className="min-h-screen bg-pink-50 flex flex-col items-center justify-center p-6">
       <div className="max-w-2xl w-full relative overflow-hidden bg-white rounded-3xl shadow-xl p-8 text-center">
         <div className="pointer-events-none absolute inset-0">
-          {/* falling hearts */}
-          {[
-            { left: "8%", delay: "0s", duration: "8s" },
-            { left: "22%", delay: "1.2s", duration: "10s" },
-            { left: "40%", delay: "0.6s", duration: "9s" },
-            { left: "58%", delay: "1.8s", duration: "11s" },
-            { left: "74%", delay: "0.9s", duration: "8.5s" },
-          ].map((heart, index) => (
-            <span
-              key={`h-${index}`}
-              className="heart-drop absolute text-3xl"
-              style={{
-                left: heart.left,
-                animationDelay: heart.delay,
-                animationDuration: heart.duration,
-                color: "#ff6ab5",
-              }}
-            >
-              💗
-            </span>
-          ))}
+          {/* falling hearts (more, biased to sides for denser side drops) */}
+          {Array.from({ length: 30 }).map((_, index) => {
+            const bias = Math.random();
+            let leftPct: number;
+            if (bias < 0.6) {
+              // 60% of hearts near the sides
+              leftPct = Math.random() < 0.5 ? Math.random() * 12 : 88 + Math.random() * 12;
+            } else {
+              // remaining in the middle area
+              leftPct = 12 + Math.random() * 76;
+            }
+
+            const left = `${leftPct.toFixed(2)}%`;
+            const delay = `${(Math.random() * 5).toFixed(2)}s`;
+            const duration = `${(4 + Math.random() * 6).toFixed(2)}s`; // faster falls
+
+            return (
+              <span
+                key={`h-${index}`}
+                className="heart-drop absolute text-3xl"
+                style={{
+                  left,
+                  animationDelay: delay,
+                  animationDuration: duration,
+                  color: "#ff6ab5",
+                }}
+              >
+                💗
+              </span>
+            );
+          })}
 
           {/* falling cherries */}
           {[
