@@ -37,37 +37,27 @@ export default function LetterPage() {
     <main className="min-h-screen bg-pink-50 flex flex-col items-center justify-center p-6">
       <div className="max-w-2xl w-full relative overflow-hidden bg-white rounded-3xl shadow-xl p-8 text-center">
         <div className="pointer-events-none absolute inset-0">
-          {/* falling hearts (more, biased to sides for denser side drops) */}
-          {Array.from({ length: 30 }).map((_, index) => {
-            const bias = Math.random();
-            let leftPct: number;
-            if (bias < 0.6) {
-              // 60% of hearts near the sides
-              leftPct = Math.random() < 0.5 ? Math.random() * 12 : 88 + Math.random() * 12;
-            } else {
-              // remaining in the middle area
-              leftPct = 12 + Math.random() * 76;
-            }
-
-            const left = `${leftPct.toFixed(2)}%`;
-            const delay = `${(Math.random() * 5).toFixed(2)}s`;
-            const duration = `${(4 + Math.random() * 6).toFixed(2)}s`; // faster falls
-
-            return (
-              <span
-                key={`h-${index}`}
-                className="heart-drop absolute text-3xl"
-                style={{
-                  left,
-                  animationDelay: delay,
-                  animationDuration: duration,
-                  color: "#ff6ab5",
-                }}
-              >
-                💗
-              </span>
-            );
-          })}
+          {/* falling hearts */}
+          {[
+            { left: "8%", delay: "0s", duration: "8s" },
+            { left: "22%", delay: "1.2s", duration: "10s" },
+            { left: "40%", delay: "0.6s", duration: "9s" },
+            { left: "58%", delay: "1.8s", duration: "11s" },
+            { left: "74%", delay: "0.9s", duration: "8.5s" },
+          ].map((heart, index) => (
+            <span
+              key={`h-${index}`}
+              className="heart-drop absolute text-3xl"
+              style={{
+                left: heart.left,
+                animationDelay: heart.delay,
+                animationDuration: heart.duration,
+                color: "#ff6ab5",
+              }}
+            >
+              💗
+            </span>
+          ))}
 
           {/* falling cherries */}
           {[
@@ -252,13 +242,13 @@ Akmed
                 })()}
               </div>
 
+              {/* main overflow spill when >100 */}
               {loveLevel > 100 ? (
                 <>
-                  {/* overflowing floating hearts that fall down from bucket */}
-                  {Array.from({ length: Math.min(40, Math.max(0, loveLevel - 100)) }).map((_, s) => {
-                    const offset = (s % 7) * 10 - 20;
-                    const delay = `${(s % 6) * 0.12}s`;
-                    const dur = `${4 + (s % 5)}s`;
+                  {Array.from({ length: Math.min(60, Math.max(0, loveLevel - 40)) }).map((_, s) => {
+                    const offset = (s % 9) * 12 - 48;
+                    const delay = `${(s % 8) * 0.08}s`;
+                    const dur = `${3 + (s % 4)}s`;
                     return (
                       <span
                         key={`spill-${s}`}
@@ -268,6 +258,36 @@ Akmed
                           top: `-6px`,
                           animationDelay: delay,
                           animationDuration: dur,
+                        }}
+                      >
+                        💗
+                      </span>
+                    );
+                  })}
+                </>
+              ) : null}
+
+              {/* side spill when nearing full to increase drop rate (>=80) */}
+              {loveLevel >= 80 && loveLevel <= 100 ? (
+                <>
+                  {Array.from({ length: 24 }).map((_, s) => {
+                    const side = s % 2 === 0 ? -1 : 1;
+                    const offset = side * (20 + (s % 6) * 8);
+                    const delay = `${(Math.random() * 1.2).toFixed(2)}s`;
+                    const dur = `${(2 + Math.random() * 3).toFixed(2)}s`;
+                    const leftCalc = `calc(50% + ${offset}px)`;
+                    const top = `${-12 - (s % 4) * 6}px`;
+                    return (
+                      <span
+                        key={`side-spill-${s}`}
+                        className="spill-heart"
+                        style={{
+                          left: leftCalc,
+                          top,
+                          animationDelay: delay,
+                          animationDuration: dur,
+                          opacity: 0.95,
+                          fontSize: `${20 + (s % 3) * 3}px`,
                         }}
                       >
                         💗
