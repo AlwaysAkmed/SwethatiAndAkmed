@@ -187,24 +187,31 @@ Akmed
 
               {/* many hearts positioned inside bucket */}
               <div className="absolute inset-x-3 bottom-3 h-full">
-                {(() => {
+                  {(() => {
                   const maxHearts = 120;
+                  const cols = 8;
                   const filled = Math.round((Math.min(loveLevel, 100) / 100) * maxHearts);
+                  const totalRows = Math.ceil(maxHearts / cols);
+                  const usableHeight = 90; // percent of bucket height to place hearts within
+
                   return Array.from({ length: filled }).map((_, i) => {
-                    const cols = 8;
                     const col = i % cols;
                     const row = Math.floor(i / cols);
-                    // base positions
-                    const baseLeft = 4 + col * (88 / (cols - 1)); // spread across
-                    const baseBottom = row * 12; // stack rows tighter
 
-                    // jitter and visual variation
+                    // base positions (left spread stays the same)
+                    const baseLeft = 4 + col * (88 / (cols - 1)); // spread across
+
+                    // compute bottom as a fraction of totalRows so rows never exceed container
+                    const rowFraction = totalRows > 1 ? row / (totalRows - 1) : 0;
+                    const baseBottom = rowFraction * usableHeight;
+
+                    // jitter and visual variation (smaller jitter since we're using percent space)
                     const jitterX = ((i * 13) % 9) - 4;
                     const jitterY = ((i * 19) % 9) - 4;
                     const left = baseLeft + jitterX * 0.6;
                     const bottom = baseBottom + jitterY * 0.6;
 
-                    const rotate = ((i * 37) % 140) - 70; // wider rotation for diagonal/vertical
+                    const rotate = ((i * 37) % 140) - 70;
                     const skewX = ((i * 17) % 50) - 25;
                     const skewY = ((i * 23) % 50) - 25;
                     const scale = 0.85 + ((i % 4) * 0.08);
