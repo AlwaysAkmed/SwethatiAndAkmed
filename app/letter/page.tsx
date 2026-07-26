@@ -7,6 +7,9 @@ export default function LetterPage() {
   const [loveLevel, setLoveLevel] = useState(75);
   const [kisses, setKisses] = useState<Array<{ id: number; left: number; top: number; delay: number; rotate: number; scale: number }>>([]);
   const timeoutRef = useRef<number | null>(null);
+  function pseudoRand(n: number) {
+    return ((n * 9301 + 49297) % 233280) / 233280;
+  }
   const trackSources = [
     "https://open.spotify.com/embed/track/6FMMd1fixOMmhplCevpjL7?utm_source=generator&si=50764b4117134662",
     "https://open.spotify.com/embed/track/0PG9fbaaHFHfre2gUVo7AN?utm_source=generator&si=46829aa410f8413f",
@@ -147,17 +150,17 @@ export default function LetterPage() {
 
           Dear Love, Swethati,
 
-I love you a lot, and I know that sometimes I don't do enough for you, so I made this website with the help of ChatGPT 😭.
+                I love you a lot, and I know that sometimes I don’t do enough for you, so I made this website with the help of ChatGPT 😭.
 
 I just want to take a moment of my time to tell you how much I love and appreciate you, and to remind you that I love you so much. Even if thousands of miles keep us apart, you are constantly on my mind and in my heart.
 
-Every morning, waking up knowing that you're in my life makes my day so much better. You bring a kind of happiness into my world that I never really knew before I met you. I find myself smiling whenever I think about you your smile, your gorgeous eyes, and your beautiful hair.
+Every morning, waking up knowing that you’re in my life makes my day so much better. You bring a kind of happiness into my world that I never really knew before I met you. I find myself smiling whenever I think about you your smile, your gorgeous eyes, and your beautiful hair.
 
-I know that the distance is really painful, but one day we'll meet and start a life together. I know it. I wish I could hug you or hold your hand, but every second of missing you hurts. Still, it will all be worth it in the end, because you are worth everything.
+I know that the distance is really painful, but one day we’ll meet and start a life together. I know it. I wish I could hug you or hold your hand, but every second of missing you hurts. Still, it will all be worth it in the end, because you are worth everything.
 
-You are my favorite thought, my biggest motivation, and my greatest comfort. I'm so grateful to call you mine. I wish I could be with you when you need me, and even when you don't.
+You are my favorite thought, my biggest motivation, and my greatest comfort. I’m so grateful to call you mine. I wish I could be with you when you need me, and even when you don’t.
 
-But until we meet, just always know that I'm with you and that I'm cheering you on, loving you endlessly from right here.
+But until we meet, just always know that I’m with you and that I’m cheering you on, loving you endlessly from right here.
 
 Yours always,
 Your love,
@@ -326,8 +329,9 @@ Akmed
                   {Array.from({ length: 12 }).map((_, s) => {
                     const side = s % 2 === 0 ? -1 : 1;
                     const offset = side * (20 + (s % 6) * 8);
-                    const delay = `${(Math.random() * 2.2).toFixed(2)}s`;
-                    const dur = `${(3 + Math.random() * 3).toFixed(2)}s`;
+                    const rnd = pseudoRand(s + 1);
+                    const delay = `${(rnd * 2.2).toFixed(2)}s`;
+                    const dur = `${(3 + rnd * 3).toFixed(2)}s`;
                     const leftCalc = `calc(50% + ${offset}px)`;
                     const top = `${-12 - (s % 4) * 6}px`;
                     return (
