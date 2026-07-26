@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 export default function LetterPage() {
   const [clickMessage, setClickMessage] = useState("");
   const [loveLevel, setLoveLevel] = useState(75);
+  const [kisses, setKisses] = useState<Array<{ id: number; left: number; top: number; delay: number; rotate: number; scale: number }>>([]);
   const timeoutRef = useRef<number | null>(null);
   const trackSources = [
     "https://open.spotify.com/embed/track/6FMMd1fixOMmhplCevpjL7?utm_source=generator&si=50764b4117134662",
@@ -42,6 +43,25 @@ export default function LetterPage() {
       setClickMessage("");
       timeoutRef.current = null;
     }, 2000);
+
+    // spawn kiss particles
+    const count = 8;
+    const newKisses = Array.from({ length: count }).map(() => {
+      return {
+        id: Date.now() + Math.floor(Math.random() * 1000000),
+        left: 50 + (Math.random() * 48 - 24),
+        top: 36 + Math.random() * 12,
+        delay: Math.random() * 0.2,
+        rotate: Math.random() * 80 - 40,
+        scale: 0.9 + Math.random() * 0.4,
+      };
+    });
+
+    setKisses((s) => [...s, ...newKisses]);
+    // remove them after animation
+    setTimeout(() => {
+      setKisses((s) => s.filter((k) => !newKisses.find((n) => n.id === k.id)));
+    }, 1800);
   }
 
   return (
@@ -92,7 +112,7 @@ export default function LetterPage() {
           ))}
         </div>
 
-        <div className="flex items-center justify-center gap-3 mb-6">
+        <div className="relative flex items-center justify-center gap-3 mb-6">
           <h1 className="text-4xl font-bold text-pink-600 m-0">
             For You <span className="text-pink-600">♥</span>
           </h1>
@@ -103,6 +123,21 @@ export default function LetterPage() {
           >
             Mwah 😘
           </button>
+          {/* kiss particles container */}
+          {kisses.map((k) => (
+            <span
+              key={k.id}
+              className="kiss absolute text-2xl"
+              style={{
+                left: `${k.left}%`,
+                top: `${k.top}%`,
+                transform: `rotate(${k.rotate}deg) scale(${k.scale})`,
+                animationDelay: `${k.delay}s`,
+              }}
+            >
+              😘
+            </span>
+          ))}
         </div>
 
         <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-line">
