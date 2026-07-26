@@ -73,11 +73,11 @@ export default function LetterPage() {
         <div className="pointer-events-none absolute inset-0">
           {/* falling hearts */}
           {[
-            { left: "8%", delay: "0s", duration: "8s" },
-            { left: "22%", delay: "1.2s", duration: "10s" },
-            { left: "40%", delay: "0.6s", duration: "9s" },
-            { left: "58%", delay: "1.8s", duration: "11s" },
-            { left: "74%", delay: "0.9s", duration: "8.5s" },
+            { left: "8%", delay: "0s", duration: "9s" },
+            { left: "22%", delay: "1.2s", duration: "11s" },
+            { left: "40%", delay: "0.6s", duration: "10s" },
+            { left: "58%", delay: "1.8s", duration: "12s" },
+            { left: "74%", delay: "0.9s", duration: "9.5s" },
           ].map((heart, index) => (
             <span
               key={`h-${index}`}
