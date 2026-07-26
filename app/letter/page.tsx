@@ -188,16 +188,29 @@ Akmed
               {/* many hearts positioned inside bucket */}
               <div className="absolute inset-x-3 bottom-3 h-full">
                 {(() => {
-                  const maxHearts = 48;
+                  const maxHearts = 120;
                   const filled = Math.round((Math.min(loveLevel, 100) / 100) * maxHearts);
                   return Array.from({ length: filled }).map((_, i) => {
-                    const cols = 6;
+                    const cols = 8;
                     const col = i % cols;
                     const row = Math.floor(i / cols);
-                    const left = 6 + col * (80 / (cols - 1)); // spread across
-                    const bottom = row * 14; // stack rows
-                    const rotate = ((i * 29) % 60) - 30;
-                    const size = 14 + ((i % 4) * 3);
+                    // base positions
+                    const baseLeft = 4 + col * (88 / (cols - 1)); // spread across
+                    const baseBottom = row * 12; // stack rows tighter
+
+                    // jitter and visual variation
+                    const jitterX = ((i * 13) % 9) - 4;
+                    const jitterY = ((i * 19) % 9) - 4;
+                    const left = baseLeft + jitterX * 0.6;
+                    const bottom = baseBottom + jitterY * 0.6;
+
+                    const rotate = ((i * 37) % 140) - 70; // wider rotation for diagonal/vertical
+                    const skewX = ((i * 17) % 50) - 25;
+                    const skewY = ((i * 23) % 50) - 25;
+                    const scale = 0.85 + ((i % 4) * 0.08);
+                    const size = 12 + ((i % 4) * 3);
+                    const opacity = 0.88 - ((row % 5) * 0.03);
+
                     return (
                       <span
                         key={i}
@@ -205,11 +218,15 @@ Akmed
                           position: "absolute",
                           left: `${left}%`,
                           bottom: `${bottom}%`,
-                          transform: `rotate(${rotate}deg)`,
+                          transform: `rotate(${rotate}deg) skew(${skewX}deg, ${skewY}deg) scale(${scale})`,
                           fontSize: `${size}px`,
                           lineHeight: 1,
-                          filter: "drop-shadow(0 2px 2px rgba(0,0,0,0.06))",
+                          opacity,
+                          filter: "drop-shadow(0 2px 3px rgba(0,0,0,0.08))",
+                          display: "inline-block",
+                          pointerEvents: "none",
                         }}
+                        className="bucket-heart"
                       >
                         💗
                       </span>
@@ -221,7 +238,7 @@ Akmed
               {loveLevel > 100 ? (
                 <>
                   {/* overflowing floating hearts that fall down from bucket */}
-                  {Array.from({ length: Math.min(14, loveLevel - 100) }).map((_, s) => {
+                  {Array.from({ length: Math.min(40, Math.max(0, loveLevel - 100)) }).map((_, s) => {
                     const offset = (s % 7) * 10 - 20;
                     const delay = `${(s % 6) * 0.12}s`;
                     const dur = `${4 + (s % 5)}s`;
