@@ -10,7 +10,7 @@ export default function LetterPage() {
     "https://open.spotify.com/embed/track/6FMMd1fixOMmhplCevpjL7?utm_source=generator&si=50764b4117134662",
     "https://open.spotify.com/embed/track/0PG9fbaaHFHfre2gUVo7AN?utm_source=generator&si=46829aa410f8413f",
     "https://open.spotify.com/embed/track/7zycSpvjDcqh6YT1FEl2kY?utm_source=generator&si=b149b3fa0fd94817",
-    "0VjIjW4GlUZAMYd2vXMi3b",
+    "https://open.spotify.com/embed/track/3PsS445MHcmtroGTstfTbm?utm_source=generator&si=344a93ce4a5049f1",
   ];
 
   function createEmbedUrl(source: string) {
@@ -139,7 +139,7 @@ Akmed
                       title={`song-${index + 1}`}
                       src={src}
                       width="100%"
-                      height="152"
+                      height={index === 3 ? "352" : "152"}
                       frameBorder="0"
                       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                       loading="lazy"
@@ -151,9 +151,7 @@ Akmed
                     </div>
                   )}
 
-                  <p className="mt-3 text-sm text-gray-500">
-                    Replace the source URL above with your own Spotify embed link or track ID.
-                  </p>
+                  
                 </div>
               );
             })}
