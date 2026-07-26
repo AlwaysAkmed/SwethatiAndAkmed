@@ -35,25 +35,25 @@ export default function LetterPage() {
   }
 
   function handleMwah() {
-    setClickMessage("Mwah 😘");
+    setClickMessage("Mwah 😘😘😘");
     if (timeoutRef.current) {
       window.clearTimeout(timeoutRef.current);
     }
     timeoutRef.current = window.setTimeout(() => {
       setClickMessage("");
       timeoutRef.current = null;
-    }, 2000);
+    }, 2500);
 
     // spawn kiss particles
-    const count = 8;
+    const count = 20;
     const newKisses = Array.from({ length: count }).map(() => {
       return {
         id: Date.now() + Math.floor(Math.random() * 1000000),
-        left: 50 + (Math.random() * 48 - 24),
-        top: 36 + Math.random() * 12,
-        delay: Math.random() * 0.2,
-        rotate: Math.random() * 80 - 40,
-        scale: 0.9 + Math.random() * 0.4,
+        left: 50 + (Math.random() * 70 - 35),
+        top: 28 + Math.random() * 24,
+        delay: Math.random() * 0.3,
+        rotate: Math.random() * 100 - 50,
+        scale: 0.8 + Math.random() * 0.6,
       };
     });
 
@@ -61,7 +61,7 @@ export default function LetterPage() {
     // remove them after animation
     setTimeout(() => {
       setKisses((s) => s.filter((k) => !newKisses.find((n) => n.id === k.id)));
-    }, 1800);
+    }, 2200);
   }
 
   return (
