@@ -37,6 +37,7 @@ export default function LetterPage() {
     <main className="min-h-screen bg-pink-50 flex flex-col items-center justify-center p-6">
       <div className="max-w-2xl w-full relative overflow-hidden bg-white rounded-3xl shadow-xl p-8 text-center">
         <div className="pointer-events-none absolute inset-0">
+          {/* falling hearts */}
           {[
             { left: "8%", delay: "0s", duration: "8s" },
             { left: "22%", delay: "1.2s", duration: "10s" },
@@ -45,15 +46,37 @@ export default function LetterPage() {
             { left: "74%", delay: "0.9s", duration: "8.5s" },
           ].map((heart, index) => (
             <span
-              key={index}
-              className="heart-drop absolute text-3xl text-pink-500"
+              key={`h-${index}`}
+              className="heart-drop absolute text-3xl"
               style={{
                 left: heart.left,
                 animationDelay: heart.delay,
                 animationDuration: heart.duration,
+                color: "#ff6ab5",
               }}
             >
-              ♥
+              💗
+            </span>
+          ))}
+
+          {/* falling cherries */}
+          {[
+            { left: "12%", delay: "0.4s", duration: "7s" },
+            { left: "30%", delay: "1s", duration: "9s" },
+            { left: "48%", delay: "0.2s", duration: "8s" },
+            { left: "66%", delay: "1.6s", duration: "10s" },
+            { left: "84%", delay: "0.8s", duration: "7.5s" },
+          ].map((cherry, i) => (
+            <span
+              key={`c-${i}`}
+              className="cherry-drop absolute text-2xl"
+              style={{
+                left: cherry.left,
+                animationDelay: cherry.delay,
+                animationDuration: cherry.duration,
+              }}
+            >
+              🍒
             </span>
           ))}
         </div>
@@ -157,27 +180,48 @@ Akmed
             </div>
 
             <div className="relative h-60 w-36 rounded-3xl border border-pink-300 bg-pink-50 p-3 text-center text-gray-700 shadow-sm">
+              {/* liquid background */}
               <div className="absolute inset-x-3 bottom-3 rounded-t-3xl bg-pink-200 transition-all duration-300"
                 style={{ height: `${Math.min(loveLevel, 100)}%` }}
               />
-              <div className="absolute inset-x-3 bottom-3 flex flex-col items-center justify-end gap-1 overflow-hidden h-full">
-                {Array.from({ length: Math.min(6, Math.ceil(Math.min(loveLevel, 100) / 18)) }).map((_, index) => (
-                  <span key={index} className="text-pink-500 text-2xl leading-none">
-                    ♥
-                  </span>
-                ))}
+
+              {/* many hearts positioned inside bucket */}
+              <div className="absolute inset-x-3 bottom-3 h-full">
+                {(() => {
+                  const maxHearts = 36;
+                  const filled = Math.round((Math.min(loveLevel, 100) / 100) * maxHearts);
+                  return Array.from({ length: filled }).map((_, i) => {
+                    const left = 8 + (i * 13) % 60; // spread
+                    const bottom = (i % 6) * 12; // stack rows
+                    const rotate = (i * 37) % 50 - 25;
+                    const size = 16 + (i % 3) * 4;
+                    return (
+                      <span
+                        key={i}
+                        style={{
+                          position: "absolute",
+                          left: `${left}%`,
+                          bottom: `${bottom}%`,
+                          transform: `rotate(${rotate}deg)`,
+                          fontSize: `${size}px`,
+                          lineHeight: 1,
+                        }}
+                      >
+                        💗
+                      </span>
+                    );
+                  });
+                })()}
               </div>
+
               {loveLevel > 100 ? (
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1">
-                  <span className="text-pink-500 text-3xl animate-bounce">♥</span>
-                  <span
-                    className="text-pink-500 text-3xl animate-bounce"
-                    style={{ animationDelay: "0.2s" }}
-                  >
-                    ♥
-                  </span>
+                <div className="absolute -top-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+                  <span className="text-pink-500 text-3xl animate-bounce">💗</span>
+                  <span className="text-pink-500 text-3xl animate-bounce" style={{ animationDelay: "0.2s" }}>💗</span>
+                  <span className="text-pink-500 text-3xl animate-bounce" style={{ animationDelay: "0.4s" }}>🍒</span>
                 </div>
               ) : null}
+
               <div className="absolute inset-x-0 bottom-0 h-4 rounded-b-3xl bg-pink-300" />
               <div className="absolute inset-x-0 top-0 h-10 border-b border-pink-300" />
               <div className="relative z-10 mt-2 text-sm font-semibold text-pink-600">

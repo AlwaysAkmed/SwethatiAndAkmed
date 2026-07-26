@@ -118,3 +118,34 @@ body {
     opacity: 0;
   }
 }
+
+/* Cherry drops */
+.cherry-drop {
+  top: -40px;
+  opacity: 0;
+  animation-name: cherry-fall;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes cherry-fall {
+  0% {
+    transform: translateY(-20px) translateX(0px) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  40% {
+    transform: translateY(35vh) translateX(20px) rotate(20deg);
+  }
+  70% {
+    transform: translateY(80vh) translateX(-20px) rotate(120deg);
+  }
+  100% {
+    transform: translateY(120vh) translateX(40px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* small niceties for bucket hearts */
+.bucket-heart { line-height: 0; }
