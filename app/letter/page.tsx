@@ -179,7 +179,7 @@ Akmed
               />
             </div>
 
-            <div className="relative h-60 w-36 rounded-3xl border border-pink-300 bg-pink-50 p-3 text-center text-gray-700 shadow-sm">
+            <div className="relative h-60 w-36 rounded-3xl border border-pink-300 bg-gradient-to-b from-pink-50 to-pink-100 p-3 text-center text-gray-700 shadow-md" style={{ boxShadow: "inset 0 -6px 12px rgba(255,90,150,0.06), 0 6px 18px rgba(255,100,150,0.08)" }}>
               {/* liquid background */}
               <div className="absolute inset-x-3 bottom-3 rounded-t-3xl bg-pink-200 transition-all duration-300"
                 style={{ height: `${Math.min(loveLevel, 100)}%` }}
@@ -188,13 +188,16 @@ Akmed
               {/* many hearts positioned inside bucket */}
               <div className="absolute inset-x-3 bottom-3 h-full">
                 {(() => {
-                  const maxHearts = 36;
+                  const maxHearts = 48;
                   const filled = Math.round((Math.min(loveLevel, 100) / 100) * maxHearts);
                   return Array.from({ length: filled }).map((_, i) => {
-                    const left = 8 + (i * 13) % 60; // spread
-                    const bottom = (i % 6) * 12; // stack rows
-                    const rotate = (i * 37) % 50 - 25;
-                    const size = 16 + (i % 3) * 4;
+                    const cols = 6;
+                    const col = i % cols;
+                    const row = Math.floor(i / cols);
+                    const left = 6 + col * (80 / (cols - 1)); // spread across
+                    const bottom = row * 14; // stack rows
+                    const rotate = ((i * 29) % 60) - 30;
+                    const size = 14 + ((i % 4) * 3);
                     return (
                       <span
                         key={i}
@@ -205,6 +208,7 @@ Akmed
                           transform: `rotate(${rotate}deg)`,
                           fontSize: `${size}px`,
                           lineHeight: 1,
+                          filter: "drop-shadow(0 2px 2px rgba(0,0,0,0.06))",
                         }}
                       >
                         💗
@@ -215,11 +219,28 @@ Akmed
               </div>
 
               {loveLevel > 100 ? (
-                <div className="absolute -top-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-                  <span className="text-pink-500 text-3xl animate-bounce">💗</span>
-                  <span className="text-pink-500 text-3xl animate-bounce" style={{ animationDelay: "0.2s" }}>💗</span>
-                  <span className="text-pink-500 text-3xl animate-bounce" style={{ animationDelay: "0.4s" }}>🍒</span>
-                </div>
+                <>
+                  {/* overflowing floating hearts that fall down from bucket */}
+                  {Array.from({ length: Math.min(14, loveLevel - 100) }).map((_, s) => {
+                    const offset = (s % 7) * 10 - 20;
+                    const delay = `${(s % 6) * 0.12}s`;
+                    const dur = `${4 + (s % 5)}s`;
+                    return (
+                      <span
+                        key={`spill-${s}`}
+                        className="spill-heart"
+                        style={{
+                          left: `calc(50% + ${offset}px)`,
+                          top: `-6px`,
+                          animationDelay: delay,
+                          animationDuration: dur,
+                        }}
+                      >
+                        💗
+                      </span>
+                    );
+                  })}
+                </>
               ) : null}
 
               <div className="absolute inset-x-0 bottom-0 h-4 rounded-b-3xl bg-pink-300" />
